@@ -18,8 +18,10 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
-/* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+///* tagging */
+static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
+
+
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -28,8 +30,19 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Firefox",  NULL,       NULL,       1 << 6,       0,           -1 },
+	{ "Mail",  	  NULL,   	  NULL,       1 << 5,       0,           -1 },
+	{ "QjackCtl", NULL,       NULL,       1 << 3,       1,           -1 },
+	{ "Non-Session-Manager", NULL, NULL,  1 << 4,       0,           -1 },
+	{ "Non-Mixer", NULL,      NULL,       1 << 4,       0,           -1 },
+	{ "Non-Timeline", NULL,   NULL,       1 << 4,       0,           -1 },
+	{ "Non-Sequencer", NULL,  NULL,       1 << 4,       0,           -1 },
+	{ "NSM-Proxy", NULL,      NULL,       1 << 4,       0,           -1 },
+	{ "Carla2",   NULL,       NULL,       1 << 3,       1,           -1 },
+	{ "mamba", 	   NULL,      NULL,       1 << 4,       1,           -1 },
 };
+
+
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
