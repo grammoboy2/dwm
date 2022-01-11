@@ -83,6 +83,8 @@ static const char *browsecmd[] = {"firefox", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+
+	{ MODKEY|ControlMask,           XK_space,  focusmaster,    {0} }, // focusmaster	
 	{ ALTKEY,                       XK_b,      spawn,          {.v = browsecmd } },
 	{ ALTKEY,                       XK_q,      spawn,          {.v = qjackctlcmd } },
 	{ ALTKEY,                       XK_t,      spawn,          {.v = mailcmd } },
