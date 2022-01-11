@@ -34,12 +34,14 @@ static const Rule rules[] = {
 	{ "Mail",  	  NULL,   	  NULL,       1 << 5,       0,           -1 },
 	{ "QjackCtl", NULL,       NULL,       1 << 3,       1,           -1 },
 	{ "Non-Session-Manager", NULL, NULL,  1 << 4,       0,           -1 },
+	/*
 	{ "Non-Mixer", NULL,      NULL,       1 << 4,       0,           -1 },
 	{ "Non-Timeline", NULL,   NULL,       1 << 4,       0,           -1 },
 	{ "Non-Sequencer", NULL,  NULL,       1 << 4,       0,           -1 },
 	{ "NSM-Proxy", NULL,      NULL,       1 << 4,       0,           -1 },
 	{ "Carla2",   NULL,       NULL,       1 << 3,       1,           -1 },
 	{ "mamba", 	   NULL,      NULL,       1 << 4,       1,           -1 },
+	*/
 };
 
 
