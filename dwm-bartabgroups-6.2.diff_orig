@@ -154,6 +154,42 @@ index 4465af1..d567978 100644
 +	}
 +}
 +
+ void
+ arrange(Monitor *m)
+ {
+@@ -441,8 +533,8 @@ buttonpress(XEvent *e)
+ 			click = ClkLtSymbol;
+ 		else if (ev->x > selmon->ww - TEXTW(stext))
+ 			click = ClkStatusText;
+-		else
+-			click = ClkWinTitle;
++		else // Focus clicked tab bar item
++			bartabcalculate(selmon, x, TEXTW(stext) - lrpad + 2, ev->x, battabclick);
+ 	} else if ((c = wintoclient(ev->window))) {
+ 		focus(c);
+ 		restack(selmon);
+@@ -728,15 +820,13 @@ drawbar(Monitor *m)
+ 	drw_setscheme(drw, scheme[SchemeNorm]);
+ 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
+ 
++	// Draw bartabgroups
++	drw_rect(drw, x, 0, m->ww - sw - x, bh, 1, 1);
+ 	if ((w = m->ww - sw - x) > bh) {
+-		if (m->sel) {
+-			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
+-			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
+-			if (m->sel->isfloating)
+-				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+-		} else {
+-			drw_setscheme(drw, scheme[SchemeNorm]);
+-			drw_rect(drw, x, 0, w, bh, 1, 1);
++		bartabcalculate(m, x, sw, -1, bartabdraw);
++		if (BARTAB_BOTTOMBORDER) {
++			drw_setscheme(drw, scheme[SchemeTabActive]);
++			drw_rect(drw, 0, bh - 1, m->ww, 1, 1, 0);
+ 		}
+ 	}
+ 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 -- 
 2.23.1
 
