@@ -27,7 +27,11 @@ dwm: ${OBJ}
 
 clean:
 	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
+<<<<<<< HEAD
 	rm -f config.h
+=======
+	rm config.h
+>>>>>>> focusmaster
 
 dist: clean
 	mkdir -p dwm-${VERSION}

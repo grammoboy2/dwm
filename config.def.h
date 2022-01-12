@@ -18,8 +18,10 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
-/* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+///* tagging */
+static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
+
+
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -28,24 +30,43 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Firefox",  NULL,       NULL,       1 << 5,       0,           -1 },
+	{ "Mail",  	  NULL,   	  NULL,       1 << 5,       0,           -1 },
+	{ "QjackCtl", NULL,       NULL,       1 << 3,       1,           -1 },
+	{ "Non-Session-Manager", NULL, NULL,  1 << 4,       0,           -1 },
+	/*
+	{ "Non-Mixer", NULL,      NULL,       1 << 4,       0,           -1 },
+	{ "Non-Timeline", NULL,   NULL,       1 << 4,       0,           -1 },
+	{ "Non-Sequencer", NULL,  NULL,       1 << 4,       0,           -1 },
+	{ "NSM-Proxy", NULL,      NULL,       1 << 4,       0,           -1 },
+	{ "Carla2",   NULL,       NULL,       1 << 3,       1,           -1 },
+	{ "mamba", 	   NULL,      NULL,       1 << 4,       1,           -1 },
+	*/
 };
+
+
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+<<<<<<< HEAD
 	{ "[D]",      deck },
+=======
+	//{ "_|",       attachBelow },
+>>>>>>> focusmaster
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
+#define ALTKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -55,13 +76,24 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *mailcmd[] = {"thunderbird", NULL};
+static const char *qjackctlcmd[] = {"qjackctl", NULL};
+static const char *browsecmd[] = {"firefox", NULL};
+
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+
+	{ MODKEY|ControlMask,           XK_space,  focusmaster,    {0} }, // focusmaster	
+	{ ALTKEY,                       XK_b,      spawn,          {.v = browsecmd } },
+	{ ALTKEY,                       XK_q,      spawn,          {.v = qjackctlcmd } },
+	{ ALTKEY,                       XK_t,      spawn,          {.v = mailcmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -77,7 +109,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+<<<<<<< HEAD
 	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
+=======
+//	{ MODKEY,                       XK_a,      setlayout,      {.v = &layouts[3]} }, /* attachBelow */
+>>>>>>> focusmaster
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
